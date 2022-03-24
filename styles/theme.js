@@ -35,6 +35,11 @@ let theme = createTheme({
     quaternary: {
       main: 'rgb(237, 100, 166)',
     },
+    quinary: {
+      main: '#F53F3F',
+      hover: '#F36666',
+      active: '#F71818'
+    },
     background: {
       paper: 'rgba(35, 35, 39, 1)',
       default: themeSetup.dark.background,

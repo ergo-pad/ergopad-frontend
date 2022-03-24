@@ -587,46 +587,39 @@ const Staking = () => {
                     You have {tokenBalance} ergopad tokens.
                   </Typography>
                 )}
-                <Grid
-                  container
-                  spacing={3}
-                  alignItems="stretch"
-                  justifyContent="center"
-                  sx={{ flexGrow: 1 }}
-                >
-                  <Grid item md={10} xs={9}>
+                <Grid container sx={{mb: 2}} justifyContent={'space-between'} alignItems={'flex-start'}>
+                  <Grid item md={9} xs={9} sx={{ minWidth: 0}}>
                     <TextField
                       InputProps={{ disableUnderline: true }}
                       required
                       fullWidth
                       id="stakingAmount"
-                      label={`Enter the token amount you are staking`}
+                      label={`Token amount to stake`}
                       name="stakingAmount"
                       variant="filled"
-                      sx={{ mb: 2 }}
                       onChange={handleStakingFormChange}
                       value={stakingForm.tokenAmount}
                       error={stakingFormErrors.tokenAmount}
                       helperText={
-                        stakingFormErrors.tokenAmount &&
-                        'Enter a valid token amount'
+                        stakingFormErrors.tokenAmount && (tokenBalance ? 'Enter a valid token amount' : 'Please connect with yoroi or nautilus to use MaxAmount')
                       }
                     />
                   </Grid>
-                  <Grid item md={2} xs={3}>
-                    <Button
-                      onClick={() => {
-                        handleStakingFormChange({
-                          target: {
-                            name: 'stakingAmount',
-                            value: tokenBalance,
-                          },
-                        });
-                      }}
-                    >
-                      Max Amount
-                    </Button>
-                  </Grid>
+                    <Grid item md={2} xs={2} sx={{ mt: 0.5, minWidth: '63.03px', maxWidth: '63.03px'}}>
+                      <Button
+                          sx={{p: 0,  minWidth: '63.03px', maxWidth: '63.03px'}}
+                          onClick={() => {
+                            handleStakingFormChange({
+                              target: {
+                                name: 'stakingAmount',
+                                value: tokenBalance,
+                              },
+                            });
+                          }}
+                      >
+                        Max Amount
+                      </Button>
+                    </Grid>
                 </Grid>
                 <FormControl
                   variant="filled"
@@ -650,7 +643,7 @@ const Staking = () => {
                     type="ergoAddress"
                     sx={{
                       width: '100%',
-                      border: '1px solid rgba(82,82,90,1)',
+                      border: '1px solid #F53F3F',
                       borderRadius: '4px',
                     }}
                   />
@@ -687,6 +680,31 @@ const Staking = () => {
                       size={'1.2rem'}
                     />
                   )}
+                </Button>
+                <Button
+                    variant="contained"
+                    sx={{
+                      color: '#fff',
+                      fontSize: '1rem',
+                      mt: 2,
+                      py: '0.6rem',
+                      px: '1.2rem',
+                      textTransform: 'none',
+                      background: theme.palette.quinary.main,
+                      '&:hover': {
+                        background: theme.palette.quinary.hover,
+                        boxShadow: 'none',
+                      },
+                      '&:active': {
+                        background: theme.palette.quinary.active,
+                      },
+                    }}
+                    onClick={() => {
+                      setOpenModal(false);
+                      setTransactionSubmitted(null);
+                    }}
+                >
+                  Cancel
                 </Button>
               </Box>
             </>
