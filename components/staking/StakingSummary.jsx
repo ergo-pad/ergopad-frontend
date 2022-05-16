@@ -21,7 +21,7 @@ const stakingItems = [
   },
 ];
 
-export const StakingItem = (item, md, loading = false) => {
+export const StakingItem = (item, md, ifSmall, loading = false) => {
   const extraStyles = {
     background: item.background,
     display: 'flex',
@@ -34,7 +34,8 @@ export const StakingItem = (item, md, loading = false) => {
     '&:hover': {},
   };
 
-  return (
+  if (!ifSmall) {
+    return (
     <Grid item md={md} xs={12} sx={{ maxWidth: '380px' }} key={item.title}>
       <Box sx={extraStyles}>
         <Typography variant="h5" sx={{ fontWeight: '700', my: 1 }}>
@@ -45,7 +46,17 @@ export const StakingItem = (item, md, loading = false) => {
         </Typography>
       </Box>
     </Grid>
-  );
+    );
+  }
+  else {
+    return (
+      <Grid item xs={12} sx={{ maxWidth: '380px' }} key={item.title}>
+        <Typography variant="p" sx={{ mb: 1, fontWeight: '700', fontSize: '0.9rem', color: theme.palette.text.primary }}>
+          {item.title}: <Typography variant="span" sx={{ fontWeight: '500', color: theme.palette.text.secondary }}>{loading ? <CircularProgress sx={{ color: '#fff' }} /> : item.value}</Typography>
+        </Typography>
+      </Grid>
+    )
+  }
 };
 
 const StakingSummary = () => {

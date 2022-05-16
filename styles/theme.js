@@ -38,6 +38,7 @@ let theme = createTheme({
     background: {
       paper: 'rgba(35, 35, 39, 1)',
       default: themeSetup.dark.background,
+      grey: themeSetup.dark.greyBackground
     },
     text: {
       primary: themeSetup.dark.primaryText,
@@ -51,7 +52,8 @@ let theme = createTheme({
     greyButton: {
       background: 'rgb(46, 46, 51)',
       hover: 'rgba(63,62,68,255)'
-    }
+    },
+    borderColor: themeSetup.dark.borderColor,
   },
   typography: {
     fontFamily: ['Inter', 'sans-serif'].join(','),
@@ -66,6 +68,15 @@ let theme = createTheme({
           marginBottom: '1rem',
         },
       },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: 'rgba(95, 95, 99, 1)',
+          },
+        }
+      }
     },
     MuiAppBar: {
       variants: [
