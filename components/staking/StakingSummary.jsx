@@ -10,7 +10,7 @@ const stakingItems = [
     background: theme.palette.primary.main,
   },
   {
-    title: 'ErgoPad Tokens Staked',
+    title: 'Tokens Staked',
     value: '-',
     background: theme.palette.secondary.main,
   },
@@ -21,7 +21,7 @@ const stakingItems = [
   },
 ];
 
-export const StakingItem = (item, md, ifSmall, loading = false) => {
+export const StakingItem = (item, md, ifSmall, token, loading = false) => {
   const extraStyles = {
     background: item.background,
     display: 'flex',

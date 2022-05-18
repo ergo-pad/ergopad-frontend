@@ -1,6 +1,12 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material';
-import MuiNextLink from '@components/MuiNextLink'
-// import theme from '@styles/theme';
+import Stack from '@mui/material/Stack';
+import Switch from '@mui/material/Switch';
+import theme from '@styles/theme';
+import InfoIcon from '@mui/icons-material/Info';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import { useState } from 'react';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const gridBox = {
   background: 'rgba(35, 35, 39, 0.7)',
@@ -18,7 +24,19 @@ const gridBox = {
   maxWidth: '380px',
 };
 
+
 const StakingRewardsBox = (props) => {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+
+  const handleTooltipClose = () => {
+    setTooltipOpen(false);
+  };
+
+  const handleTooltipOpen = () => {
+    setTooltipOpen(true);
+  };
+
+
   return (
     <>
       <Box
@@ -31,8 +49,10 @@ const StakingRewardsBox = (props) => {
         <Typography variant="h5" sx={{ fontWeight: '700' }}>
           Your Holdings
         </Typography>
+        
       </Box>
       <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        
         <Box sx={gridBox}>
           <Typography>ErgoPad Staked</Typography>
           <Typography variant="h3" sx={{ mb: 0 }}>
@@ -87,9 +107,28 @@ const StakingRewardsBox = (props) => {
         </Box>
         
       </Box>
-      <Typography variant="p" sx={{ fontSize: '0.9rem', mb: 0, p: 2, pb: 0 }}>
-              Note: This only display tokens in your primary connected address. To see all staked tokens across all connected addresses in this wallet, see <MuiNextLink href="/dashboard">Dashboard</MuiNextLink>. 
-      </Typography>
+      <Box sx={{ p: 1 }} >
+        <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-end" sx={{ color: theme.palette.text.secondary }}>
+          <Typography sx={{ textAlign: 'right' }}>Sum all addresses in wallet
+          </Typography>
+          <ClickAwayListener onClickAway={handleTooltipClose}>
+            <Tooltip 
+              PopperProps={{ disablePortal: true }}
+              onClose={handleTooltipClose}
+              open={tooltipOpen}
+              disableFocusListener
+              disableHoverListener
+              disableTouchListener 
+              title="You can choose a main address when you connect a wallet. Toggle  to show the number of staked tokens in only the selected address, or to take the sum of all addresses in your connected wallet"
+            >
+              <IconButton aria-label="more info">
+                <InfoIcon onClick={handleTooltipOpen} fontSize="small" sx={{ color: theme.palette.text.secondary }} />
+              </IconButton>
+            </Tooltip> 
+          </ClickAwayListener>
+          <Switch defaultChecked />
+        </Stack>
+      </Box>
     </>
   );
 };
